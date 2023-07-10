@@ -1,0 +1,8 @@
+
+s	java:S125"<This block of commented-out lines of code should be removed.(ë‹„„ıÿÿÿÿ8ÄöÛÏ’1H„RMAJORZ
+CODE_SMELL
+s	java:S125#"<This block of commented-out lines of code should be removed.(ë‹„„ıÿÿÿÿ8ÄöÛÏ’1HRMAJORZ
+CODE_SMELL
+e
+java:S1068"2Remove this unused "jsonSerializer" private field.(Ê×ùÍ8ÄöÛÏ’1HRMAJORZ
+CODE_SMELL

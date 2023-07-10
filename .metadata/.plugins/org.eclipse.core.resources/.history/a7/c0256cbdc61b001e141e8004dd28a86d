@@ -1,0 +1,34 @@
+package com.sagachoreographyos.event;
+
+
+import java.util.Date;
+import java.util.UUID;
+
+
+public class PaymentEvent implements Event {
+	private UUID eventId = UUID.randomUUID();
+	private Date date = new Date();
+	private Payment paymentRequestDto;
+	private PaymentStatus paymentStatus;
+	
+	
+	
+	public PaymentEvent() {
+		
+	}
+	public PaymentEvent(PaymentRequestDto paymentRequestDto, PaymentStatus paymentStatus) {
+		super();
+		this.paymentRequestDto = paymentRequestDto;
+		this.paymentStatus = paymentStatus;
+	}
+	@Override
+	public UUID getEventId() {
+		// TODO Auto-generated method stub
+		return eventId;
+	}
+	@Override
+	public Date getDate() {
+		// TODO Auto-generated method stub
+		return date;
+	}
+}

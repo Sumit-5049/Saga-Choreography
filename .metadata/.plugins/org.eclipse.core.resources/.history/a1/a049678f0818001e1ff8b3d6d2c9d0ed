@@ -1,0 +1,24 @@
+package com.sagachoreographyos.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sagachoreographyos.dao.OrderDao;
+import com.sagachoreographyos.entity.Order;
+import com.sagachoreographyos.event.OrderStatus;
+
+@Service
+public class OrderService {
+	
+	@Autowired
+	private OrderDao dao;
+
+	public Order createOrder(Order orderReq) {
+		orderReq.setOrderStatus(OrderStatus.ORDER_CREATED);
+		dao.save(orderReq);
+		return null;
+	}
+	
+	
+	
+}

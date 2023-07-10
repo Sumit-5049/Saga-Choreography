@@ -1,0 +1,98 @@
+package com.sagachoreographyos.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
+
+import com.sagachoreographyos.dao.OrderDao;
+import com.sagachoreographyos.entity.Order;
+import com.sagachoreographyos.event.OrderEvent;
+import com.sagachoreographyos.event.OrderStatus;
+
+@Service
+public class OrderService {
+	
+	private final KafkaTemplate<String, OrderEvent> kafkaTemplate;
+	
+	@Autowired
+	private OrderDao dao;
+	
+	
+	public OrderService(KafkaTemplate<String, OrderEvent> kafkaTemplate) {
+	    this.kafkaTemplate = kafkaTemplate;
+	}
+
+	public void sendMessage(OrderEvent orderEvent) {
+	    kafkaTemplate.send("payment-topic", orderEvent);
+	}
+
+	public Order createOrder(Order orderReq) {
+		orderReq.setOrderStatus(OrderStatus.ORDER_CREATED);
+		Order oRes =dao.save(orderReq);
+		OrderEvent orderEvent= new OrderEvent(orderReq, OrderStatus.ORDER_CREATED);
+		this.sendMessage(orderEvent);
+		return oRes;
+	}
+	
+
+
+
+
+	-------
+	@Autowired
+	private OrderRepository orderRepository;
+
+	@Autowired
+	private OrderPublisher op;
+
+	@Transactional
+	public PurchaseOrder createOrder(OrderRequestDto orderRequesrDto) {
+		PurchaseOrder order = orderRepository.save(convertDtotoEntity(orderRequesrDto));
+		orderRequesrDto.setOrderId(order.getId());
+		OrderEvent orderEvent = new OrderEvent(orderRequesrDto,Orderstatus.ORDER_CREATED);
+		op.sendMsgtoTopic(orderEvent);
+		return order;
+	}
+	
+
+@Transactional
+public void cancelOrder(Integer id) {
+	
+	 orderRepository.findById(id)
+	                .ifPresent(d->
+	                             {
+	                            	 d.setOrderStatus(Orderstatus.ORDER_CANCELLED);
+	                            	 d.setPaymentStatus(PaymentStatus.PAYMENT_REFUNDED);
+	                            	 orderRepository.save(d);
+	                            	 OrderEvent o = convertToDto(d);
+	                                 op.sendMsgtoTopic(o);});
+		
+	}
+
+//	public PurchaseOrder createOrder() {
+//		System.out.println("2");
+//		op.sendMsgtoTopic("Hii");
+//			return null;
+//		}
+
+	public PurchaseOrder convertDtotoEntity(OrderRequestDto dto) {
+		PurchaseOrder purchaseOrder = new PurchaseOrder();
+		purchaseOrder.setProductId(dto.getProductId());
+		purchaseOrder.setUserId(dto.getUserId());
+		purchaseOrder.setOrderStatus(Orderstatus.ORDER_CREATED);
+		purchaseOrder.setPrice(dto.getAmount());
+		return purchaseOrder;
+	}
+	
+	private OrderEvent convertToDto(PurchaseOrder purchaseOrder) {
+		OrderRequestDto orderRequestDto = new OrderRequestDto();
+		orderRequestDto.setOrderId(purchaseOrder.getId());
+		orderRequestDto.setUserId(purchaseOrder.getUserId());
+		orderRequestDto.setAmount(purchaseOrder.getPrice());
+		orderRequestDto.setProductId(purchaseOrder.getProductId());
+		return new OrderEvent(orderRequestDto,purchaseOrder.getOrderStatus());
+	}
+
+	
+	
+}

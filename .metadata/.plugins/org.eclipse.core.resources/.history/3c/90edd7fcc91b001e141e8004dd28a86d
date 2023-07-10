@@ -1,0 +1,5 @@
+package com.sagachoreographyps.entity;
+
+public class UserBalance {
+
+}

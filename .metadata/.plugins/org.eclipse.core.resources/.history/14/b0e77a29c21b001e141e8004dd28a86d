@@ -1,0 +1,25 @@
+package com.sagachoreographyos.config;
+package com.orchestrator.order.config;
+
+import org.apache.kafka.common.errors.SerializationException;
+import org.apache.kafka.common.serialization.Serializer;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.orchestrator.common.event.OrderEvent;
+
+
+@Component
+public class OrderSerializer implements Serializer<OrderEvent>  {
+
+	private ObjectMapper objectMapper = new ObjectMapper();
+	
+	 @Override
+     public byte[] serialize(String topic, OrderEvent data) {
+         try {
+             return objectMapper.writeValueAsBytes(data);
+         } catch (Exception e) {
+             throw new SerializationException("Error serializing OrderEvent to JSON", e);
+         }
+     }
+}

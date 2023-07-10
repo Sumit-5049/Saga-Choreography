@@ -1,0 +1,9 @@
+package com.sagachoreographyps.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.sagachoreographyos.entity.Order;
+
+public interface UserTranscationDao extends JpaRepository<UserTranscation, Integer>{
+
+}

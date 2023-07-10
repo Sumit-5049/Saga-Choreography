@@ -1,0 +1,8 @@
+package com.sagachoreographyps;
+
+public class Snippet {
+	public static void main(String[] args) {
+		ORDER_CREATED
+	}
+}
+

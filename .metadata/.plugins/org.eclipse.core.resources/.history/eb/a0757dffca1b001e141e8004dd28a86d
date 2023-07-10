@@ -1,0 +1,59 @@
+package com.sagachoreographyps.service;
+
+
+import java.util.stream.Stream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sagachoreographyps.dao.UserBalanceDao;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
+
+@Service
+public class PaymentService {
+	@Autowired
+	private UserBalanceDao userBalanceRepo;
+	@Autowired
+	private UserTransctionDao userTransactionRepo;
+	
+	@PostConstruct
+	public void initUserBalance() {
+		userBalanceRepo.saveAll(Stream.of(new UserBalance(101,5000),new UserBalance(102,10000),
+				new UserBalance(103,20000),
+				new UserBalance(104,1000),
+				new UserBalance(105,40000)).toList());
+	}
+
+	@Transactional
+	public PaymentEvent newOrderEvent(OrderEvent ord) {
+		OrderRequestDto od = ord.getOrderRequestDto();
+		PaymentRequestDto prd = new PaymentRequestDto(od.getOrderId(),
+				od.getUserId(),od.getAmount());
+		System.out.println("inside new order event processing");
+	return userBalanceRepo.findById(od.getUserId())
+			
+		.filter(b->b.getBalance()>od.getAmount())
+		.map(b->{
+			b.setBalance(b.getBalance()-od.getAmount());
+		    userTransactionRepo.save(new UserTransaction(od.getOrderId(),od.getUserId(),od.getAmount()));
+		    return (new PaymentEvent(prd,PaymentStatus.PAYMENT_COMPLETED));
+		}).orElse( new PaymentEvent(prd,PaymentStatus.PAYMENT_FAILED));
+
+		
+	}
+
+	@Transactional
+	public void cancelOrderEvent(OrderEvent ord) {
+		System.out.println("inside cancel order event processing");
+		userTransactionRepo.findById(ord.getOrderRequestDto().getOrderId())
+		.ifPresent(ut->{
+			userTransactionRepo.delete(ut);
+			userBalanceRepo.findById(ut.getUserId())
+			.ifPresent(ub->{ub.setBalance(ub.getBalance()+ut.getAmount());}); 
+		});
+		
+	}
+
+}

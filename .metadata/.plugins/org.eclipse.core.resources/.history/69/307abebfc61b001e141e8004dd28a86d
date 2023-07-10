@@ -1,0 +1,5 @@
+package com.sagachoreographyos.event;
+
+public enum PaymentStatus {
+	PAYMENT_SUCESSESS,PAYMENT_REJECTED;
+}

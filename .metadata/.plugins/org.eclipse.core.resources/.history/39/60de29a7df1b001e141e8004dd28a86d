@@ -1,0 +1,67 @@
+package com.sagachoreographyps.service;
+
+
+import java.util.stream.Stream;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.sagachoreographyps.dao.UserBalanceDao;
+import com.sagachoreographyps.dao.UserTranscationDao;
+import com.sagachoreographyps.entity.Payment;
+import com.sagachoreographyps.entity.UserBalance;
+import com.sagachoreographyps.entity.UserTranscation;
+import com.sagachoreographyps.event.Order;
+import com.sagachoreographyos.event.OrderEvent;
+import com.sagachoreographyps.event.PaymentEvent;
+import com.sagachoreographyps.event.PaymentStatus;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.transaction.Transactional;
+
+@Service
+public class PaymentService {
+	@Autowired
+	private UserBalanceDao userBalanceRepo;
+	@Autowired
+	private UserTranscationDao userTransactionRepo;
+	
+	@PostConstruct
+	public void initUserBalance() {
+		userBalanceRepo.saveAll(Stream.of(new UserBalance(101,5000),new UserBalance(102,10000),
+				new UserBalance(103,20000),
+				new UserBalance(104,1000),
+				new UserBalance(105,40000)).toList());
+	}
+
+	@Transactional
+	public PaymentEvent newOrderEvent(OrderEvent ord) {
+		Order od = ord.getOrder();
+		Payment prd = new Payment(od.getId(),
+				od.getUserId(),od.getPrice());
+		System.out.println("inside new order event processing");
+	return userBalanceRepo.findById(od.getUserId())
+			
+		.filter(b->b.getBalance()>od.getPrice())
+		.map(b->{
+			b.setBalance(b.getBalance()-od.getPrice());
+		    userTransactionRepo.save(new UserTranscation(od.getId(),od.getUserId(),od.getPrice()));
+		    return (new PaymentEvent(prd,PaymentStatus.PAYMENT_COMPLETED));
+		}).orElse( new PaymentEvent(prd,PaymentStatus.PAYMENT_FAILED));
+
+		
+	}
+
+	@Transactional
+	public void cancelOrderEvent(OrderEvent ord) {
+		System.out.println("inside cancel order event processing");
+		userTransactionRepo.findById(ord.getOrder().getId())
+		.ifPresent(ut->{
+			userTransactionRepo.delete(ut);
+			userBalanceRepo.findById(ut.getUserId())
+			.ifPresent(ub->{ub.setBalance(ub.getBalance()+ut.getAmount());}); 
+		});
+		
+	}
+
+}

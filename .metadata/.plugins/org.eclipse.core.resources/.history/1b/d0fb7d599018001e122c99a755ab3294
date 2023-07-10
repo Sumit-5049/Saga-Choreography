@@ -1,0 +1,7 @@
+spring.datasouce.driver-class-name= com.mysql.cj.jdbc.Driver
+spring.datasource.url= jdbc:mysql://localhost:3306/microservice-saga-orchestration-order
+spring.datasource.username=root
+spring.datasource.password=system
+
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
