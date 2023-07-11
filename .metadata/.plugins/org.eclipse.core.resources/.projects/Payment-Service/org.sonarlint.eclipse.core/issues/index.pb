@@ -9,8 +9,6 @@ l
 <src/main/java/com/sagachoreographyps/event/PaymentEvent.java,2\b\2b63e78f2d38b0c673bbb8b925057c534553983a
 Y
 )src/main/resources/application.properties,0\6\06f65155ec73600b9fc5c4dc2883d4bb84d8e284
-u
-Esrc/main/java/com/sagachoreographyps/config/CustomerDeserializer.java,4\5\454894d00c4e3c2a469fef5ebc88449ca39214d9
 p
 @src/main/java/com/sagachoreographyps/entity/UserTranscation.java,2\c\2c69dad6be0256798aff7ded0e862ade609af08a
 l

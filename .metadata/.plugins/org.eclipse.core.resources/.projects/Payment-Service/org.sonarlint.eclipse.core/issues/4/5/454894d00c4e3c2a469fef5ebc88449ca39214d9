@@ -1,5 +1,0 @@
-
-p	java:S106"9Replace this use of System.out or System.err by a logger.(û‹‘Ûùÿÿÿÿ8¨ÕÓÏ’1HÒRMAJORZ
-CODE_SMELL
-V
-java:S2116"%Use "Arrays.toString(array)" instead.(û‹‘Ûùÿÿÿÿ8¨ÕÓÏ’1HÓRMAJORZBUG

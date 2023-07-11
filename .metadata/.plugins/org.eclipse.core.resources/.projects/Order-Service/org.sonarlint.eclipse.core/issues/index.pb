@@ -19,8 +19,6 @@ t
 Dsrc/main/java/com/sagachoreographyos/controller/OrderController.java,f\b\fb297c282627112f64a8b6b8ed9a988c7a0cf8a4
 m
 =src/main/java/com/sagachoreographyos/event/PaymentStatus.java,9\6\962ff77f95826785fa2cf5d4faa2948a744d8f7a
-j
-:src/main/java/com/sagachoreographyos/dto/OrderRequest.java,4\0\403f1dd71aaa3e0889bde71757be6256bd9621bb
 p
 @src/main/java/com/sagachoreographyos/config/OrderSerializer.java,7\9\79f7d21f8cfc0a22eebaf592341175500f17bddb
 p
@@ -31,3 +29,5 @@ o
 ?src/main/java/com/sagachoreographyos/service/OrderConsumer.java,a\d\ad388d537f6ef9c9d9a59d4c994d13597c2bdbf9
 g
 7src/main/java/com/sagachoreographyos/event/Payment.java,5\f\5f359f041c4580b7cef8856669e33381e23e27a1
+q
+Asrc/main/java/com/sagachoreographyos/OrderServiceApplication.java,6\5\65e263f9bddcc5d113aecaa8cc48a967d3baea92

@@ -1,5 +1,0 @@
-package com.sagachoreographyos.event;
-
-public enum OrderStatus {
-
-}

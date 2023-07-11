@@ -1,7 +1,7 @@
 
-‘
-java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").( ­úÆùÿÿÿÿ8ùªŒˆ‘1H×RMINORZ
-CODE_SMELL
 R
-java:S3751"Make this method non "private".(íµÌ’8…ÖóÎ’1H€RMAJORZ
+java:S3751"Make this method non "private".(íµÌ’8…ÖóÎ’1HëRMAJORZ
+CODE_SMELL
+‘
+java:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").( ­úÆùÿÿÿÿ8ùªŒˆ‘1HìRMINORZ
 CODE_SMELL

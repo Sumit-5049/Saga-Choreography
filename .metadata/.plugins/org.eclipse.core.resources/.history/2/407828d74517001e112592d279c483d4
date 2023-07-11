@@ -1,5 +1,0 @@
-package com.sagachoreographyos.dao;
-
-public interface OrderDao {
-
-}

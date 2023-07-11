@@ -1,15 +1,15 @@
 
-j	java:S1062"9Replace this use of System.out or System.err by a logger.(Ú‰À[8‚ğ×Ô’1HÅRMAJORZ
-CODE_SMELL
-k	java:S106$"9Replace this use of System.out or System.err by a logger.(—öäß8êöãÎ’1HºRMAJORZ
-CODE_SMELL
 d
-java:S1602%",Remove useless curly braces around statement(“È÷ÿÿÿÿÿ8êöãÎ’1H»RMINORZ
+java:S1602%",Remove useless curly braces around statement(“È÷ÿÿÿÿÿ8êöãÎ’1HRMINORZ
+CODE_SMELL
+k	java:S106*"9Replace this use of System.out or System.err by a logger.(ö¡¹ê8“îæÔ’1H‚RMAJORZ
+CODE_SMELL
+j	java:S1062"9Replace this use of System.out or System.err by a logger.(Ú‰À[8‚ğ×Ô’1HƒRMAJORZ
+CODE_SMELL
+k	java:S106$"9Replace this use of System.out or System.err by a logger.(—öäß8êöãÎ’1H„RMAJORZ
 CODE_SMELL
 á
-java:S1130""­Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'com.fasterxml.jackson.core.JsonProcessingException'.(™Šã8êöãÎ’1H·RMINORZ
+java:S1130""­Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'com.fasterxml.jackson.core.JsonProcessingException'.(™Šã8êöãÎ’1H…RMINORZ
 CODE_SMELL
-s	java:S1256"<This block of commented-out lines of code should be removed.(¦Äå¥ıÿÿÿÿ8êöãÎ’1H¹RMAJORZ
-CODE_SMELL
-k	java:S106*"9Replace this use of System.out or System.err by a logger.(ö¡¹ê8“îæÔ’1HÇRMAJORZ
+s	java:S1256"<This block of commented-out lines of code should be removed.(¦Äå¥ıÿÿÿÿ8êöãÎ’1H‡RMAJORZ
 CODE_SMELL
